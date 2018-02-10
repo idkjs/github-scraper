@@ -72,34 +72,43 @@ async function run() {
 
     console.log("Numpages: ", numPages);
 
-    let listLength = await page.evaluate(sel => {
-      return document.getElementsByClassName(sel).length;
-    }, LENGTH_SELECTOR_CLASS);
+    // let listLength = await page.evaluate(sel => {
+    //   return document.getElementsByClassName(sel).length;
+    // }, LENGTH_SELECTOR_CLASS);
 
-    /** extract loop */
-    for (let i = 1; i <= listLength; i++) {
-      // change the index to the next child
-      let usernameSelector = LIST_USERNAME_SELECTOR.replace("INDEX", i);
-      let emailSelector = LIST_EMAIL_SELECTOR.replace("INDEX", i);
+    /** add outer loop to go through all the pages */
+    for (let h = 1; h <= numPages; h++) {
+      let pageUrl = searchUrl + "&p=" + h;
 
-      let username = await page.evaluate(sel => {
-        return document
-          .querySelector(sel)
-          .getAttribute("href")
-          .replace("/", "");
-      }, usernameSelector);
+      await page.goto(pageUrl);
+      let listLength = await page.evaluate(sel => {
+        return document.getElementsByClassName(sel).length;
+      }, LENGTH_SELECTOR_CLASS);
 
-      let email = await page.evaluate(sel => {
-        let element = document.querySelector(sel);
-        return element ? element.innerHTML : null;
-      }, emailSelector);
+      for (let i = 1; i <= listLength; i++) {
+        // change the index to the next child
+        let usernameSelector = LIST_USERNAME_SELECTOR.replace("INDEX", i);
+        let emailSelector = LIST_EMAIL_SELECTOR.replace("INDEX", i);
 
-      // not all users have emails visible
-      if (!email) continue;
+        let username = await page.evaluate(sel => {
+          return document
+            .querySelector(sel)
+            .getAttribute("href")
+            .replace("/", "");
+        }, usernameSelector);
 
-      console.log(username, " -> ", email);
+        let email = await page.evaluate(sel => {
+          let element = document.querySelector(sel);
+          return element ? element.innerHTML : null;
+        }, emailSelector);
 
-      // TODO save this user
+        // not all users have emails visible
+        if (!email) continue;
+
+        console.log(username, " -> ", email);
+
+        // TODO save this user
+      }
     }
   } catch (error) {
     console.error(error);
