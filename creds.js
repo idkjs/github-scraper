@@ -5,4 +5,4 @@ module.exports = {
   password: process.env.GITHUB_PASSWORD
 };
 
-console.log(process.env.GITHUB_USERNAME);
+// console.log(process.env.GITHUB_USERNAME);
