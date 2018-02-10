@@ -31,6 +31,16 @@ async function run() {
    *
    */
   // browser.close();
+  /** type search term into search input to get the url for get request then pass
+   * search term parameter to it.
+   * const searchUrl = `https://github.com/search?utf8=%E2%9C%93&q=john&type=`
+   */
+  const userToSearch = "john";
+  const searchUrl = `https://github.com/search?utf8=%E2%9C%93&q=${userToSearch}&type=`;
+
+  /** navigate to search page and run search */
+  await page.goto(searchUrl);
+  await page.waitFor(2 * 1000);
 }
 
 run();
