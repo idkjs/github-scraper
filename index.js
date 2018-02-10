@@ -1,6 +1,7 @@
 const puppeteer = require("puppeteer");
 const CREDS = require("./creds");
-
+const mongoose = require("mongoose");
+const User = require("./models/user");
 /** login into github */
 async function run() {
   /**
@@ -107,17 +108,21 @@ async function run() {
 
         console.log(username, " -> ", email);
 
-        // TODO save this user
+        upsertUser({
+          username: username,
+          email: email,
+          dateCrawled: new Date()
+        });
       }
     }
+
+    browser.close();
   } catch (error) {
     console.error(error);
   }
 }
-run();
 
 /** function to return number of availabe pages to get results from */
-
 async function getNumPages(page) {
   /** variable to hold element selector with number of results */
   const NUM_USER_SELECTOR = `#js-pjax-container > div > div.columns > div.column.three-fourths.codesearch-results > div > div.d-flex.flex-justify-between.border-bottom.pb-3 > h3`;
@@ -142,3 +147,21 @@ async function getNumPages(page) {
   let numPages = Math.ceil(numUsers / 10);
   return numPages;
 }
+
+function upsertUser(userObj) {
+  const DB_URL = "mongodb://localhost/medium-scraper";
+
+  if (mongoose.connection.readyState == 0) {
+    mongoose.connect(DB_URL);
+  }
+
+  // if this email exists, update the entry, don't insert
+  let conditions = { email: userObj.email };
+  let options = { upsert: true, new: true, setDefaultsOnInsert: true };
+
+  User.findOneAndUpdate(conditions, userObj, options, (err, result) => {
+    if (err) throw err;
+  });
+}
+
+run();

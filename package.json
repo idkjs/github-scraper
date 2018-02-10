@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "jsdom": "~11.6.2",
+    "mongoose": "~5.0.4",
     "puppeteer": "~1.0.0"
   },
   "devDependencies": {
