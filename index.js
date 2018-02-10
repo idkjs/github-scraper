@@ -66,7 +66,9 @@ async function run() {
      * class user-list-item are actually housing information about a single user each.
      */
     const LENGTH_SELECTOR_CLASS = "user-list-item";
+    const numPages = await getNumPages(page);
 
+    console.log("Numpages: ", numPages);
     let listLength = await page.evaluate(sel => {
       return document.getElementsByClassName(sel).length;
     }, LENGTH_SELECTOR_CLASS);
@@ -101,3 +103,30 @@ async function run() {
   }
 }
 run();
+
+/** function to return number of availabe pages to get results from */
+
+async function getNumPages(page) {
+  /** variable to hold element selector with number of results */
+  const NUM_USER_SELECTOR = `#js-pjax-container > div > div.columns > div.column.three-fourths.codesearch-results > div > div.d-flex.flex-justify-between.border-bottom.pb-3 > h3`;
+
+  let inner = await page.evaluate(sel => {
+    let html = document.querySelector(sel).innerHTML;
+
+    // format is: "69,803 users"
+    return html
+      .replace(",", "")
+      .replace("users", "")
+      .trim();
+  }, NUM_USER_SELECTOR);
+
+  let numUsers = parseInt(inner);
+
+  console.log("numUsers: ", numUsers);
+
+  /*
+  * GitHub shows 10 resuls per page, so
+  */
+  let numPages = Math.ceil(numUsers / 10);
+  return numPages;
+}
