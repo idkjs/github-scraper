@@ -1,20 +1,35 @@
 {
-  "name": "medium-scraper",
+  "name": "github-scraper",
   "version": "1.0.0",
-  "description": "",
+  "description": "Web Scrapper with Chrome Headless & Puppeteer",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/idkjs/github-scraper.git"
+  },
+  "keywords": [
+    "Puppeteer",
+    "Chrome",
+    "Headless",
+    "Scrapping",
+    "github-scraper",
+    "mongodb"
+  ],
+  "author": "Alain Armand",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/idkjs/github-scraper/issues"
+  },
+  "homepage": "https://github.com/idkjs/github-scraper#readme",
   "dependencies": {
     "jsdom": "~11.6.2",
     "mongoose": "~5.0.4",
     "puppeteer": "~1.0.0"
   },
   "devDependencies": {
-    "dotenv": "~5.0.0",
     "env2": "~2.2.0"
   }
 }
