@@ -62,3 +62,11 @@ At this point in your tut, [Extract Emails](https://medium.com/@e_mad_ehsan/gett
 Note the `em` at then end. If you use this, the loop doesnt work. You have to change it to #user_search_results > div.user-list > div:nth-child(1) > div.d-flex > div > a for it to run.
 
 Correct string `#user_search_results > div.user-list > div:nth-child(2) > div.d-flex > div > ul > li:nth-child(2) > a`.
+
+## looping through pages
+
+At the bottom of the search results page, if you hover the mouse over buttons with page numbers, you can see they link to the next pages. The link to 2nd page with results is `https://github.com/search?p=2&q=john&type=Users&utf8=%E2%9C%93`. Notice the p=2 query parameter in the URL. This will help us navigate to the next page. Or click inspect and copy out html:
+
+```html
+<a rel="next" href="/search?p=2&amp;q=john&amp;type=Users&amp;utf8=%E2%9C%93">2</a>
+```
