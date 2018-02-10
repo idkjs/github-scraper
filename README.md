@@ -53,3 +53,12 @@ for (let h = 1; h <= numPages; h++) {
    }
 }
 ```
+
+## selecting username selector
+
+At this point in your tut, [Extract Emails](https://medium.com/@e_mad_ehsan/getting-started-with-puppeteer-and-chrome-headless-for-web-scrapping-6bf5979dee3e#---0-14), when you selected the username selector in devtools, this is what I am getting:
+`#user_search_results > div.user-list > div:nth-child(1) > div.d-flex > div > a > em`.
+
+Note the `em` at then end. If you use this, the loop doesnt work. You have to change it to #user_search_results > div.user-list > div:nth-child(1) > div.d-flex > div > a for it to run.
+
+Correct string `#user_search_results > div.user-list > div:nth-child(2) > div.d-flex > div > ul > li:nth-child(2) > a`.
