@@ -2,6 +2,14 @@
 
 Medium Tutorial: https://medium.com/@e_mad_ehsan/getting-started-with-puppeteer-and-chrome-headless-for-web-scrapping-6bf5979dee3e
 
+## Tags
+
+* [searchInput](https://github.com/idkjs/github-scraper/tree/searchInput)
+* [listNumPages](https://github.com/idkjs/github-scraper/tree/listNumPages)
+* [with-loop](https://github.com/idkjs/github-scraper/tree/with-loop)
+* [looping-thru-pages](https://github.com/idkjs/github-scraper/tree/looping-thru-pages)
+* [with-mongodb](https://github.com/idkjs/github-scraper/tree/with-mongodb)
+
 ## LIST_SELECTOR
 
 * Currently one way to extract text from an element is by using evaluate method of Page or ElementHandle.
