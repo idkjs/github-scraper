@@ -16,7 +16,7 @@ async function run() {
 
     /** get screenshots */
     // await page.goto('https://github.com');
-    // await page.screenshot path: 'screenshots/github.png' });
+    // await page.screenshot ({path: 'screenshots/github.png' });
 
     /** Navigate to login */
     await page.goto("https://github.com/login");
